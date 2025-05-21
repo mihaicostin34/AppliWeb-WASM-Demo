@@ -22,6 +22,7 @@ public class SysInfo {
     private float cpuUsage;
     private int processes;
     private Date timestamp;
+    private String user;
 
     public void setHostname(String hostname) {
         this.hostname = hostname;
@@ -61,6 +62,14 @@ public class SysInfo {
 
     public int getProcesses(){
         return processes;
+    }
+
+    public String getUser(){
+        return this.user;
+    }
+
+    public void setUser(String user){
+        this.user = user;
     }
 
     // public SysInfo(

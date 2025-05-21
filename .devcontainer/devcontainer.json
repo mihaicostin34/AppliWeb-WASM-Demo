@@ -1,0 +1,13 @@
+{
+    "image": "mihaicostin/projapplyweb:1.3",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "rust-lang.rust-analyzer",
+                "tamasfe.even-better-toml",
+                "mutantdino.resourcemonitor",
+                "vadimcn.vscode-lldb"
+            ]
+        }
+    }
+}

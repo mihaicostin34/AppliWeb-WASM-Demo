@@ -19,7 +19,7 @@ Download the jar: https://sourceforge.net/projects/hsqldb/files/
 
 2. Build and run the server: 
 ```bash
-~/serveur$ ./mvnw package
+~/serveur$ ./mvnw clean spring-boot:run
 ```
 To run the server, move the generated `.war` file into `/apache-tomcat-11.0.1/webapps` and start the tomcat server
 
@@ -88,3 +88,27 @@ The react client should not be run without the server running. It will work, but
 - [ ] historical analysis: querying over custom time ranges
 - [ ] tagging computers: `dev`, `prod`, `test`
 - [ ] add alerts to database
+
+## Usage with codespaces
+
+Codespace is setup to have the working environment already prepared, so no need to install anything on your machine, just to have an internet connection. The steps remain the same (BD, server, then machine and/or client).
+
+The following have to be specified: 
+
+1. `hsqldb` is located under `/`. Move to this directory before starting the database 
+2. before starting the react client, run 
+
+```bash
+npm install
+```
+
+1. since the programs are all running on the same machine (the one executing the Docker container), no need to change any URLs/ports on the actual programs. For the react client, a window will automatically open and you can try it from there.
+
+if you want to test just the server (using Postman or with `curl`) **DISCUSS WITH MIHAI FIRST** and then change the server's address in your prpgram (which should initially be `localhost:8080`) to the http link given by codespaces (under the `Ports` section in the terminal).
+
+## Contributing
+
+Regardless of how you write and run your code (locally or through codespace), please treat the repo accordingly: 
+- make a separate branch when you are starting to implement a feature (and explicitly name said branch)
+- use commit, push and whatever else you need (for your branch)
+- DO NOT MERGE DIRECTLY INTO MAIN because it will make me said
