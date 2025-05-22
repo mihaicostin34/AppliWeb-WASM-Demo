@@ -7,48 +7,50 @@ import jakarta.persistence.*;
 public class Computer {
 
     @Id
-    @Column(nullable = false, name="hostname")
+    @Column(name = "hostname", nullable = false, unique = true)
     private String hostname;
 
-    @Column(nullable = false)
+    @Column(name = "ip", nullable = false)
     private String ip;
 
-    @Column(nullable = false)
-    private String user;
+    @Column(name = "maxRam", nullable = false)
+    private Integer maxRam;
 
-    @Column(nullable = false)
-    private Integer team;
+    @Column(name = "maxCpu", nullable = false)
+    private Integer maxCpu;
+
+    @Column(name = "maxStorage", nullable = false)
+    private Integer maxStorage;
 
     public String getHostname() {
         return hostname;
     }
-
     public void setHostname(String hostname) {
         this.hostname = hostname;
     }
-
     public String getIp() {
         return ip;
     }
-
     public void setIp(String ip) {
         this.ip = ip;
     }
-
-    public String getUser() {
-        return user;
+    public Integer getMaxRam() {
+        return maxRam;
     }
-
-    public void setUser(String user) {
-        this.user = user;
+    public void setMaxRam(Integer maxRam) {
+        this.maxRam = maxRam;
     }
-
-    public Integer getTeam() {
-        return team;
+    public Integer getMaxCpu() {
+        return maxCpu;
     }
-
-    public void setTeam(Integer team) {
-        this.team = team;
+    public void setMaxCpu(Integer maxCpu) {
+        this.maxCpu = maxCpu;
+    }
+    public Integer getMaxStorage() {
+        return maxStorage;
+    }
+    public void setMaxStorage(Integer maxStorage) {
+        this.maxStorage = maxStorage;
     }
     
 }

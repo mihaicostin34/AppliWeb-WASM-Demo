@@ -3,7 +3,6 @@ use std::time::Duration;
 use chrono::Utc;
 use sysinfo::RefreshKind;
 use sysinfo::CpuRefreshKind;
-use sysinfo::Users;
 use tokio::time::sleep;
 
 #[tokio::main]
