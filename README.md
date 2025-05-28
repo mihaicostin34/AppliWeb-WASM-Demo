@@ -145,3 +145,20 @@ Regardless of how you write and run your code (locally or through codespace), pl
 - then they are taken to the main page (`dashboard.js`)
 - from the main page they can go to `performance.js` to see some graphs or, for their accessible computer(s), see the associated `machine.js`
 - admins will also have the option to go to their associated pages
+
+## Business logic
+- only the admins can create new accounts (we will manually add the admins in the db)
+  - when creating a new account, the admin must indicate the username and password; usernames must be **unique**
+- only a global admin can create **groups** / **teams**
+- only a global admin can **modify** the parameters of other users: changing their associated group or role
+- a **user** can have different **roles** on different **teams**
+- a machine can be associated with **multiple** users and a user can use **multiple** machines
+- a machine will **periodically** send its info to the server (Example: every 5 seconds)
+  - this info will include the machine's **name**, **ip**, **performance information**, **timestamp**
+- the app will allow a user to see information related to the computer(s) associated to them
+  - for a **team leader/admin**, they will be able to see infos for all the computers of their team
+  - for a **regular user**, they will only see the info associated to their username
+  - for a **global admin**, they will be able to see everything
+- the app will allow users to see logs associated to machines that are visible to them
+
+**TO BE CONTINUED**
