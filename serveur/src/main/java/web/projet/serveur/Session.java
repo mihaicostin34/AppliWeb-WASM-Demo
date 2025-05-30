@@ -1,22 +1,13 @@
 package web.projet.serveur;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Table;
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.Collection;
 import java.util.Date;
 
 
 @Entity
-@Table(name = "Sessions")
-public class Session {
-
-    @Id
-    @Column(name = "id", nullable = false, unique = true)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	Long id;
+public class Session extends ResourceUser {
 
     @Column(name = "startTime", nullable = false)
     private Date startTime;
@@ -24,42 +15,65 @@ public class Session {
     @Column(name = "endTime", nullable = true)  // nullable = true because the session may not have ended yet
     private Date endTime;
 
-    @Column(name = "username", nullable = false)
-    private String username;
+    @ManyToOne
+    private User user;
 
-    @Column(name = "hostname", nullable = false)
-    private String hostname;
-    
-    
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @ManyToOne
+    private Computer computer;
+
+    @OneToMany(mappedBy = "session")
+    private Collection<Log> logs;
+
+    @OneToMany(mappedBy = "resourceUser")
+    private Collection<ResourceUsage> resourceUsages;
+
     public Date getStartTime() {
         return startTime;
     }
+
     public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
+
     public Date getEndTime() {
         return endTime;
     }
+
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
-    public String getUsername() {
-        return username;
+
+    public User getUser() {
+        return user;
     }
-    public void setUsername(String username) {
-        this.username = username;
+
+    public void setUser(User user) {
+        this.user = user;
     }
-    public String getHostname() {
-        return hostname;
+
+    public Computer getComputer() {
+        return computer;
     }
-    public void setHostname(String hostname) {
-        this.hostname = hostname;
+
+    public void setComputer(Computer computer) {
+        this.computer = computer;
     }
+
+    public Collection<Log> getLogs() {
+        return logs;
+    }
+
+    public void setLogs(Collection<Log> logs) {
+        this.logs = logs;
+    }
+
+    public Collection<ResourceUsage> getResourceUsages() {
+        return resourceUsages;
+    }
+
+    public void setResourceUsages(Collection<ResourceUsage> resourceUsages) {
+        this.resourceUsages = resourceUsages;
+    }
+    
     
 }

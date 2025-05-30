@@ -7,14 +7,6 @@ import org.springframework.data.repository.query.Param;
 
 import jakarta.transaction.Transactional;
 
-public interface ComputerRepository extends JpaRepository<Computer, String>{
-
-    @Query("select c from #{#entityName} c where c.hostname = :#{#hostname}")
-    Computer findByHostname(@Param("hostname") String hostname);
-
-    @Modifying
-    @Transactional
-    @Query("UPDATE #{#entityName} a SET a.team = :#{#team} WHERE a.hostname = :#{#hostname}")
-    int assignTeam(@Param("team") Integer team, @Param("hostname") String hostname);
+public interface ComputerRepository extends JpaRepository<Computer, Long>{
 
 }
