@@ -2,6 +2,8 @@ package web.projet.serveur;
 
 import java.util.Collection;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -18,6 +20,7 @@ public class Group {
     private String description;
 
     @OneToMany(mappedBy = "group")
+    @JsonIgnore
     private Collection<Membership> memberships;
 
     public Long getId() {

@@ -2,6 +2,8 @@ package web.projet.serveur;
 
 import java.util.Collection;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 
 
@@ -21,6 +23,7 @@ public class Process extends ResourceUser {
     private Long sessionId;
 
     @OneToMany(mappedBy = "resourceUser")
+    @JsonIgnore
     private Collection<ResourceUsage> resourceUsages;
 
     public String getName() {
