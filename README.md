@@ -100,6 +100,7 @@ The following have to be specified:
 
 ```bash
 npm install
+npm add react-router-dom
 ```
 
 1. since the programs are all running on the same machine (the one executing the Docker container), no need to change any URLs/ports on the actual programs. For the react client, a window will automatically open and you can try it from there.
