@@ -6,7 +6,10 @@
                 "rust-lang.rust-analyzer",
                 "tamasfe.even-better-toml",
                 "mutantdino.resourcemonitor",
-                "vadimcn.vscode-lldb"
+                "vadimcn.vscode-lldb",
+                "redhat.java",
+                "vscjava.vscode-java-pack"
+
             ]
         }
     }

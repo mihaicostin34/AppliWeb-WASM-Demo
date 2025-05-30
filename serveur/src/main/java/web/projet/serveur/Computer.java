@@ -1,5 +1,7 @@
 package web.projet.serveur;
 
+import java.util.Collection;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -7,17 +9,37 @@ import jakarta.persistence.*;
 public class Computer {
 
     @Id
-    @Column(nullable = false, name="hostname")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "hostname", nullable = false, unique = true)
     private String hostname;
 
-    @Column(nullable = false)
+    @Column(name = "ip", nullable = false)
     private String ip;
 
-    @Column(nullable = false)
-    private String user;
+    @Column(name = "maxRam", nullable = false)
+    private Integer maxRam;
 
-    @Column(nullable = false)
-    private Integer team;
+    @Column(name = "maxCpu", nullable = false)
+    private Integer maxCpu;
+
+    @Column(name = "maxStorage", nullable = false)
+    private Integer maxStorage;
+
+    @OneToMany(mappedBy = "computer")
+    private Collection<Session> sessions;
+
+    @OneToMany(mappedBy = "computer")
+    private Collection<Storage> storages;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getHostname() {
         return hostname;
@@ -35,20 +57,45 @@ public class Computer {
         this.ip = ip;
     }
 
-    public String getUser() {
-        return user;
+    public Integer getMaxRam() {
+        return maxRam;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setMaxRam(Integer maxRam) {
+        this.maxRam = maxRam;
     }
 
-    public Integer getTeam() {
-        return team;
+    public Integer getMaxCpu() {
+        return maxCpu;
     }
 
-    public void setTeam(Integer team) {
-        this.team = team;
+    public void setMaxCpu(Integer maxCpu) {
+        this.maxCpu = maxCpu;
     }
+
+    public Integer getMaxStorage() {
+        return maxStorage;
+    }
+
+    public void setMaxStorage(Integer maxStorage) {
+        this.maxStorage = maxStorage;
+    }
+
+    public Collection<Session> getSessions() {
+        return sessions;
+    }
+
+    public void setSessions(Collection<Session> sessions) {
+        this.sessions = sessions;
+    }
+
+    public Collection<Storage> getStorages() {
+        return storages;
+    }
+
+    public void setStorages(Collection<Storage> storages) {
+        this.storages = storages;
+    }
+
     
 }
