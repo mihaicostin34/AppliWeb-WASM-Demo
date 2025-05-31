@@ -4,9 +4,46 @@ use chrono::Utc;
 use sysinfo::RefreshKind;
 use sysinfo::CpuRefreshKind;
 use tokio::time::sleep;
+use std::env;
 
 #[tokio::main]
 async fn main()  {
+
+    // select what job needs to be done by the machine via the JOB environment variable
+    //
+    // 1. Adding new users to the database -> one shot, does not do it on loop
+    // 2. Adding new computers to the database -> one shot, does not do it on loop
+    // 3. 
+
+    let selected_job = env::var("JOB");
+    match selected_job{
+        Ok(job) => {
+            match job{
+                "Users" => {
+                    let mock_users = 
+                    [
+                        String::from("mihai"), 
+                        String::from("astrid"), 
+                        String::from("emeric"), 
+                        String::from("alexandre")
+                    ];
+                    for user in mock_users{
+                        
+                    }
+                },
+                "Computers" => {
+
+                },
+                _ => {
+                    println!("{} is not a valid job", job);
+                }
+            }
+        },
+        Err(e) => {
+            println!("No job selected: doing nothing");
+        }
+    }
+
     //spawn request thread
     tokio::spawn(async move{
         let mut system = sysinfo::System::new_with_specifics(
