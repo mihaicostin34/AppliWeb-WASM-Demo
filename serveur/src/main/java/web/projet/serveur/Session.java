@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import java.util.Collection;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class Session extends ResourceUser {
@@ -22,10 +24,8 @@ public class Session extends ResourceUser {
     private Computer computer;
 
     @OneToMany(mappedBy = "session")
+    @JsonIgnore
     private Collection<Log> logs;
-
-    @OneToMany(mappedBy = "resourceUser")
-    private Collection<ResourceUsage> resourceUsages;
 
     public Date getStartTime() {
         return startTime;
@@ -65,14 +65,6 @@ public class Session extends ResourceUser {
 
     public void setLogs(Collection<Log> logs) {
         this.logs = logs;
-    }
-
-    public Collection<ResourceUsage> getResourceUsages() {
-        return resourceUsages;
-    }
-
-    public void setResourceUsages(Collection<ResourceUsage> resourceUsages) {
-        this.resourceUsages = resourceUsages;
     }
     
     

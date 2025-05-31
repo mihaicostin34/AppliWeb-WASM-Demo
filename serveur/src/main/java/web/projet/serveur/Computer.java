@@ -2,6 +2,8 @@ package web.projet.serveur;
 
 import java.util.Collection;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -28,9 +30,11 @@ public class Computer {
     private Integer maxStorage;
 
     @OneToMany(mappedBy = "computer")
+    @JsonIgnore
     private Collection<Session> sessions;
 
     @OneToMany(mappedBy = "computer")
+    @JsonIgnore
     private Collection<Storage> storages;
 
     public Long getId() {
