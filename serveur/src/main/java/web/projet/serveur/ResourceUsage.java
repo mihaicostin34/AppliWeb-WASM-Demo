@@ -1,5 +1,7 @@
 package web.projet.serveur;
 
+import java.sql.Date;
+
 import jakarta.persistence.*;
 
 
@@ -12,7 +14,7 @@ public class ResourceUsage {
     private Long id;;
 
     @Column(name = "time", nullable = false)
-    private long time;
+    private Date time;
 
     @Column(name = "usedRam", nullable = false)
     private double usedRam;
@@ -31,11 +33,11 @@ public class ResourceUsage {
         this.id = id;
     }
 
-    public long getTime() {
+    public Date getTime() {
         return time;
     }
 
-    public void setTime(long time) {
+    public void setTime(Date time) {
         this.time = time;
     }
 

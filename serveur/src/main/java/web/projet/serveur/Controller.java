@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -64,15 +65,13 @@ public class Controller {
     }
 
     @PostMapping("/computer")
-    public Computer createComputer(@RequestParam String hostname, @RequestParam String ip, 
-    @RequestParam Integer maxRam, @RequestParam Integer maxCpu, 
-    @RequestParam Integer maxStorage) {
+    public Computer createComputer(@RequestBody Computer newComputer) {
         Computer computer = new Computer();
-        computer.setHostname(hostname);
-        computer.setIp(ip);
-        computer.setMaxRam(maxRam);
-        computer.setMaxCpu(maxCpu);
-        computer.setMaxStorage(maxStorage);
+        computer.setHostname(newComputer.getHostname());
+        computer.setIp(newComputer.getIp());
+        computer.setMaxRam(newComputer.getMaxRam());
+        computer.setMaxCpu(newComputer.getMaxCpu());
+        computer.setMaxStorage(newComputer.getMaxStorage());
         return computerRepository.save(computer);
     }
     
@@ -93,10 +92,10 @@ public class Controller {
     }
 
     @PostMapping("/group")
-    public Group createGroup(@RequestParam String name, @RequestParam String description) {
+    public Group createGroup(@RequestBody Group newGroup) {
         Group group = new Group();
-        group.setName(name);
-        group.setDescription(description);
+        group.setName(newGroup.getName());
+        group.setDescription(newGroup.getDescription());
         return groupRepository.save(group);
     }
 
@@ -121,15 +120,11 @@ public class Controller {
     }
 
     @PostMapping("/membership")
-    public Membership createMembership(@RequestParam Long userId, @RequestParam Long groupId, @RequestParam String role) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
-        Group group = groupRepository.findById(groupId).orElseThrow(() -> new RuntimeException("Group not found"));
-
+    public Membership createMembership(@RequestBody Membership newMembership) {
         Membership membership = new Membership();
-        membership.setUser(user);
-        membership.setGroup(group);
-        membership.setRole(Membership.UserRole.valueOf(role.toUpperCase()));
-
+        membership.setUser(newMembership.getUser());
+        membership.setGroup(newMembership.getGroup());
+        membership.setRole(newMembership.getRole());
         return membershipRepository.save(membership);
     }
 
@@ -150,27 +145,21 @@ public class Controller {
     }
 
     @PostMapping("/process")
-    public Process createProcess(@RequestParam String name, @RequestParam Integer pid, 
-                                 @RequestParam Long resourceUsageId, @RequestParam Long sessionId) {
+    public Process createProcess(@RequestBody Process newProcess) {
         Process process = new Process();
-        process.setName(name);
-        process.setPid(pid);
-        process.setResourceUsageId(resourceUsageId);
-        process.setSessionId(sessionId);
+        process.setName(newProcess.getName());
+        process.setPid(newProcess.getPid());
+        process.setResourceUsages(newProcess.getResourceUsages());
         return processRepository.save(process);
     }
 
     @PostMapping("/process/resourceUsage")
-    public ResourceUsage createResourceUsage(@RequestParam Long processId, @RequestParam long time, 
-                                             @RequestParam double usedRam, @RequestParam double usedCpu) {
-        Process process = processRepository.findById(processId).orElseThrow(() -> new RuntimeException("Process not found"));
-
+    public ResourceUsage createResourceUsage(@RequestBody ResourceUsage newResourceUsage) {
         ResourceUsage resourceUsage = new ResourceUsage();
-        resourceUsage.setTime(time);
-        resourceUsage.setUsedRam(usedRam);
-        resourceUsage.setUsedCpu(usedCpu);
-        resourceUsage.setResourceUser(process);
-
+        resourceUsage.setUsedRam(newResourceUsage.getUsedRam());
+        resourceUsage.setUsedCpu(newResourceUsage.getUsedCpu());
+        resourceUsage.setResourceUser(newResourceUsage.getResourceUser());
+        resourceUsage.setTime(newResourceUsage.getTime());
         return resourceUsageRepository.save(resourceUsage);
     }
 
@@ -195,16 +184,12 @@ public class Controller {
     }
 
     @PostMapping("/session")
-    public Session createSession(@RequestParam Long computerId, 
-                                 @RequestParam Long userId, @RequestParam Date startTime) {
-        Computer computer = computerRepository.findById(computerId).orElseThrow(() -> new RuntimeException("Computer not found"));
-        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
-
+    public Session createSession(@RequestBody Session newSession) {
         Session session = new Session();
-        session.setStartTime(startTime);
-        session.setComputer(computer);
-        session.setUser(user);
-
+        session.setStartTime(newSession.getStartTime());
+        session.setEndTime(newSession.getEndTime());
+        session.setComputer(newSession.getComputer());
+        session.setUser(newSession.getUser());
         return sessionRepository.save(session);
     }
 
@@ -214,17 +199,11 @@ public class Controller {
     }
 
     @PostMapping("/storage")
-    public Storage createStorage(@RequestParam Long userId, 
-                                 @RequestParam Long computerId,
-                                 @RequestParam Integer storageUsed) {
-        Computer computer = computerRepository.findById(computerId).orElseThrow(() -> new RuntimeException("Computer not found"));
-        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
-
+    public Storage createStorage(@RequestBody Storage newStorage) {
         Storage storage = new Storage();
-        storage.setUser(user);
-        storage.setComputer(computer);
-        storage.setStorageUsed(storageUsed);
-
+        storage.setStorageUsed(newStorage.getStorageUsed());
+        storage.setComputer(newStorage.getComputer());
+        storage.setUser(newStorage.getUser());
         return storageRepository.save(storage);
     }
 
@@ -258,16 +237,12 @@ public class Controller {
     }
 
     @PostMapping("/user")
-    public User createUser(@RequestParam String username, @RequestParam String password) {
+    public User createUser(@RequestBody User newUser) {
         User user = new User();
-        user.setUsername(username);
-        user.setPassword(password);
+        user.setUsername(newUser.getUsername());
+        user.setPassword(newUser.getPassword());
         return userRepository.save(user);   
     }
-
-
-
-    
 
     @GetMapping("/login")
     public User login(@RequestParam String username, @RequestParam String password) {

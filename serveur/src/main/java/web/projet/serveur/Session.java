@@ -27,10 +27,6 @@ public class Session extends ResourceUser {
     @JsonIgnore
     private Collection<Log> logs;
 
-    @OneToMany(mappedBy = "resourceUser")
-    @JsonIgnore
-    private Collection<ResourceUsage> resourceUsages;
-
     public Date getStartTime() {
         return startTime;
     }
@@ -69,14 +65,6 @@ public class Session extends ResourceUser {
 
     public void setLogs(Collection<Log> logs) {
         this.logs = logs;
-    }
-
-    public Collection<ResourceUsage> getResourceUsages() {
-        return resourceUsages;
-    }
-
-    public void setResourceUsages(Collection<ResourceUsage> resourceUsages) {
-        this.resourceUsages = resourceUsages;
     }
     
     
