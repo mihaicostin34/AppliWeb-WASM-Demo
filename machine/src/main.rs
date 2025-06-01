@@ -112,7 +112,7 @@ async fn main()  {
                 },
                 "Memberships" =>{
                     let memberships = vec![
-                        //key: Id, role, user_id, group_id
+                        //key: role, user_id, group_id
                         ("ADMIN", 1, 1),   
                         ("VIEWER", 2, 1),   
                         ("ADMIN", 3, 1),            
@@ -123,10 +123,10 @@ async fn main()  {
                     for (role, uid, gid) in memberships{
                         let body = json!(
                             {
-                                "id" : 0 as u8,
+                                // Le controller attend des objets user et group, pas des ids simples
                                 "role" : role,
-                                "user_id": uid,
-                                "group_id" : gid
+                                "user": { "id": uid },
+                                "group": { "id": gid }
                             }
                         );
                         let req_url = server_url.clone().to_owned();
@@ -195,8 +195,9 @@ async fn main()  {
                         let body = json!(
                             {
                                 "storageUsed" : storage,
-                                "computer_id" : cid,
-                                "user_id" : uid
+                                // Le controller attend des objets computer et user
+                                "computer": { "id": cid },
+                                "user": { "id": uid }
                             }
                         );
                         let req_url = server_url.clone().to_owned();
@@ -235,12 +236,12 @@ async fn main()  {
                                 "time" : date,
                                 "usedRam" : ram,
                                 "usedCpu" : cpu, 
-                                "resourceUser_id" : uid
+                                "resourceUser" : { "id": uid }
                             }
                         );
                         let req_url = server_url.clone().to_owned();
                         let res = Client::new()
-                            .post(req_url + "/process/resourceUsage")
+                            .post(req_url + "/resourceUsage")
                             .json(&body)
                             .send().await;
                     }
@@ -264,7 +265,7 @@ async fn main()  {
                             );
                             let req_url = server_url.clone().to_owned();
                             let res = Client::new()
-                                .post(req_url + "/process/resourceUsage")
+                                .post(req_url + "/resourceUsage")
                                 .json(&body)
                                 .send().await;
                             sleep(Duration::from_secs(5)).await;
@@ -296,8 +297,9 @@ async fn main()  {
                             {   
                                 "startTime" : start,
                                 "endTime" : end,
-                                "user_id" : uid, 
-                                "computer_id" : cid
+                                // Le controller attend des objets user et computer
+                                "user": { "id": uid },
+                                "computer": { "id": cid }
                             }
                         );
                         let req_url = server_url.clone().to_owned();
@@ -313,8 +315,8 @@ async fn main()  {
                             {   
                                 "startTime" : start,
                                 "endTime" : null,
-                                "user_id" : uid, 
-                                "computer_id" : cid
+                                "user": { "id": uid },
+                                "computer": { "id": cid }
                             }
                         );
                         let req_url = server_url.clone().to_owned();

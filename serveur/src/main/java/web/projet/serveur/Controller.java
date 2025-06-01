@@ -153,15 +153,6 @@ public class Controller {
         return processRepository.save(process);
     }
 
-    @PostMapping("/process/resourceUsage")
-    public ResourceUsage createResourceUsage(@RequestBody ResourceUsage newResourceUsage) {
-        ResourceUsage resourceUsage = new ResourceUsage();
-        resourceUsage.setUsedRam(newResourceUsage.getUsedRam());
-        resourceUsage.setUsedCpu(newResourceUsage.getUsedCpu());
-        resourceUsage.setResourceUser(newResourceUsage.getResourceUser());
-        resourceUsage.setTime(newResourceUsage.getTime());
-        return resourceUsageRepository.save(resourceUsage);
-    }
 
     @GetMapping("/resourceUsages")
     public Collection<ResourceUsage> getResourceUsages() {
@@ -171,6 +162,16 @@ public class Controller {
     @GetMapping("/resourceUsage")
     public ResourceUsage getResourceUsage(@RequestParam Long id) {
         return resourceUsageRepository.findById(id).orElseThrow(() -> new RuntimeException("Resource Usage not found"));
+    }
+
+    @PostMapping("/resourceUsage")
+    public ResourceUsage createResourceUsage(@RequestBody ResourceUsage newResourceUsage) {
+        ResourceUsage resourceUsage = new ResourceUsage();
+        resourceUsage.setUsedRam(newResourceUsage.getUsedRam());
+        resourceUsage.setUsedCpu(newResourceUsage.getUsedCpu());
+        resourceUsage.setResourceUser(newResourceUsage.getResourceUser());
+        resourceUsage.setTime(newResourceUsage.getTime());
+        return resourceUsageRepository.save(resourceUsage);
     }
 
     @GetMapping("/sessions")
