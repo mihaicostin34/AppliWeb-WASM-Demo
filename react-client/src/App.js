@@ -1,32 +1,26 @@
-import LoginForm from './pages/login';
-import useToken from './pages/useToken';
-import Create from './pages/admin/admin_create';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Layout from './pages/layout';
-import Dashboard from './pages/dashboard';
+import Manage from './pages/Manage';
+import Stats from './pages/Stats';
+import Menu from './components/Menu';
+import Home from './pages/Home';
+import UserDetails from "./pages/stats_navigation/UserDetails";
+import GroupDetails from "./pages/stats_navigation/GroupDetails";
+import ComputerDetails from "./pages/stats_navigation/ComputerDetails";
 
-function App(){
-
-  const { token, setToken } = useToken();
-
-  if(!token){
-    return < LoginForm setToken = { setToken }/>
-  }
-
+function App() {
   return (
-    <>
     <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<Layout />}>
-                    <Route index element={<Dashboard />} />
-                    <Route path="/" element={<Dashboard />} />
-                    <Route path="/new" element={<Create />} />
-                    {/* <Route path="*" element={<NoPage />} /> */}
-                </Route>
-            </Routes>
-        </BrowserRouter>
-    </>
+      <Menu />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/stats" element={<Stats />} />
+        <Route path="/manage" element={<Manage />} />
+        <Route path="/user/:id" element={<UserDetails />} />
+        <Route path="/group/:id" element={<GroupDetails />} />
+        <Route path="/computer/:id" element={<ComputerDetails />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
-export default App
+export default App;
