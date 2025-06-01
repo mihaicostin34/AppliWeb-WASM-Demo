@@ -163,3 +163,21 @@ Regardless of how you write and run your code (locally or through codespace), pl
 - the app will allow users to see logs associated to machines that are visible to them
 
 **TO BE CONTINUED**
+
+## Using the machine to fill the database
+1. The machine will use two environment variables: `JOB` (corresponding to the desired data to add in the db) and `URL` (the url for the server). To run the program: 
+```bash
+> export JOB=<required_job> URL=<server_url> && cargo run
+```
+Leaving the `URL` option incomplete/not including it in the command will automatically set the used url to `http://localhost:8080`.
+
+2. `JOB` options: 
+    - Users: runs once, adds 4 users to the database 
+    - Computers: runs once, adds 10 computers to the database
+    - Groups: runs once, adds 6 groups to the database
+    - Memberships: runs once, 6 memberships with the existing groups and users
+    - Processes: runs once, adds processes to the database
+    - Storages: runs once, adds storages 
+    - ResourceUsages: runs endlessly on loop : first adds a few pre existing instances then every 5 seconds generates one more and sends it to the database
+    - Sessions: runs once, adds sessions both ended (with end time) and ongoing (without end time)
+3. Any data can be modified: the mock data is in lists inside the code. For each list of data I added a key to indicate what each member of the tuple means. 

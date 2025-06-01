@@ -10,10 +10,10 @@ import jakarta.persistence.*;
 @Entity
 public class Process extends ResourceUser {
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = true)
     private String name;
     
-    @Column(name = "pid", nullable = false)
+    @Column(name = "pid", nullable = true)
     private Integer pid;
 
     public String getName() {
