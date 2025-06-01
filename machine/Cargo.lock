@@ -642,6 +642,8 @@ dependencies = [
  "chrono",
  "rand",
  "reqwest",
+ "serde",
+ "serde_json",
  "sysinfo",
  "tokio",
 ]

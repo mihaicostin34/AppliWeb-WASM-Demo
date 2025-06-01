@@ -12,50 +12,34 @@ function Create(){
     const [groupDesc, setGroupDesc] = useState("");
     const navigate = useNavigate();
 
-    function handleCreateAccount () {
+    async function handleCreateAccount () {
         console.log("create account");
 
-        let full_url = data["server-url"]+"new-user";
+        let full_url = data["server-url"]+"/user";
 
-        // let body = JSON.stringify(
-        //         {
-        //             username : username,
-        //             password : password
-        //         }
-        //     );
-        //     console.log(body);
-        // const response = await fetch(full_url, {
-        //     method: "POST",
-        //     body: body
-        // });
-
-        // console.log(response);
-
-        // const response1 = await fetch(data["server-url"]+"/users", {
-        //     method: "GET",
-        //     headers : {
-        //         "Content-Type" : "application/json"
-        //     }
-        // });
-        // console.log(response1);
-
-        const xhr = new XMLHttpRequest();
-        xhr.open("POST", full_url);
-        xhr.setRequestHeader(
-            "Content-Type","application/json"
+        let body = JSON.stringify(
+            {
+                id: 0,
+                username : username,
+                password : password
+            }
         );
-        const body = {
-            "username": username,
-            "password": password
+
+        let headers = {
+            "Content-Type": "application/json",
+            // "Access-Control-Allow-Origin": "*"
         };
-        xhr.onload = () => {
-        if (xhr.readyState == 4 && xhr.status == 201) {
-            console.log(JSON.parse(xhr.responseText));
-        } else {
-            console.log(`Error: ${xhr.status}`);
-        }
-        };
-        xhr.send(body);
+ 
+        const response = await fetch(full_url, {
+            method: "POST",
+            body: body,
+            headers: headers
+        });
+
+        // uncomment if you want to see the result of the request - it is the id, username and pwd of 
+        // the newly created user
+        // let base_user = await response.json();
+
         navigate("/");
     }
 

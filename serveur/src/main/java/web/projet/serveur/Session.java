@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class Session extends ResourceUser {
 
-    @Column(name = "startTime", nullable = false)
+    @Column(name = "startTime", nullable = true) // nullable = true because it shares a table with process (which can not have a start time)
     private Date startTime;
 
     @Column(name = "endTime", nullable = true)  // nullable = true because the session may not have ended yet

@@ -1,5 +1,7 @@
 package web.projet.serveur;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 
 @Entity

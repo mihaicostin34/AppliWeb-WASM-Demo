@@ -1,5 +1,6 @@
 package web.projet.serveur;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
