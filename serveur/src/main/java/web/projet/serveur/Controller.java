@@ -1,6 +1,7 @@
 package web.projet.serveur;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -149,7 +150,6 @@ public class Controller {
         Process process = new Process();
         process.setName(newProcess.getName());
         process.setPid(newProcess.getPid());
-        process.setResourceUsages(newProcess.getResourceUsages());
         return processRepository.save(process);
     }
 
